@@ -1,6 +1,6 @@
 import Users from '../modals/userModal.mjs'
         
-// Add a new User
+// Add a new Sign Up
         let addUser=async(req,res)=>{
             try {
             let newUser = new Users({
@@ -23,7 +23,16 @@ import Users from '../modals/userModal.mjs'
                res.status(500).json({message:"Internal server errror"});
             }
             }
-
+            
+// Login User
+let LoginUser=async(req,res)=>{
+    try {
+    
+    } catch (error) {
+       console.log(error) ;
+       res.status(500).json({message:"Internal server errror"});
+    }
+    }
   
-    const UserController = {addUser};
+    const UserController = {addUser, LoginUser};
     export default UserController;
