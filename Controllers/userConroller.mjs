@@ -18,6 +18,7 @@ import Users from '../modals/userModal.mjs'
                 user:adduser,
             })
             } 
+            
             } catch (error) {
                console.log(error) ;
                res.status(500).json({message:"Internal server errror"});
@@ -27,6 +28,11 @@ import Users from '../modals/userModal.mjs'
 // Login User
 let LoginUser=async(req,res)=>{
     try {
+if (condition) {
+    
+} else {
+    
+}
     
     } catch (error) {
        console.log(error) ;
