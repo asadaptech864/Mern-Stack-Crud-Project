@@ -3,6 +3,7 @@ import Users from '../modals/userModal.mjs'
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit OTP
 
 const sendVerificationEmail = async (req, res) => {
+
   try {
     const { email } = req.body;
 
@@ -15,7 +16,7 @@ const sendVerificationEmail = async (req, res) => {
 
     // Save OTP to user
    // await user.update({ otp, otpExpiresAt });
-   user.otp = otp;
+    user.otp = otp;
     user.otpExpiresAt = otpExpiresAt;
     await user.save();
 
@@ -28,7 +29,7 @@ const sendVerificationEmail = async (req, res) => {
       },
     });
 
-    const html = `<p>Your verification code is: <strong>${otp}</strong>. It is valid for 1 minute.</p>`;
+    const html = `<p>Your verification code is: <strong>${otp}</strong>. It is valid for 1 only minute.</p>`;
 
     await transporter.sendMail({
       from: `"Verify Email" <${process.env.EMAIL_USER}>`,
