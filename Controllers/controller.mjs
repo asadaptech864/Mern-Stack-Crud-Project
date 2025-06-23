@@ -46,7 +46,7 @@ let getAllProducts=async(req,res)=>{
                  name:req.body.name,
                  description:req.body.description,
                  price:req.body.price,
-                 quantity:req.body.quantity,
+              
                  image:req.body.image,
                  category:req.body.category,
                  inStock:req.body.inStock,
