@@ -102,5 +102,36 @@ let getAllProducts=async(req,res)=>{
                 }
             }
 
-    const controller = { getAllProducts,getProduct,addProduct,updateProduct,deleteProduct};
+            // Add a new product with image
+        let addProductwithimage=async(req,res)=>{
+            try {
+                console.log(req.file.path);
+            let newProduct = new Product({
+                 name:req.body.name,
+                 description:req.body.description,
+                 price:req.body.price,
+              
+                 imageUrl:req.file.path,
+                 category:req.body.category,
+                 inStock:req.body.inStock,
+                 
+            
+            });
+            let addprod = await Product.insertOne(newProduct);
+            if (!addprod) {
+                   res.status(404).json({message:"Failed to add product"});
+            } else {
+            
+                res.status(200).json({
+                message:"Product added successfully",
+                product:addprod,
+            })
+            } 
+            } catch (error) {
+               console.log(error) ;
+               res.status(500).json({message:"Internal server errror"});
+            }
+            }
+
+    const controller = { getAllProducts,getProduct,addProduct,updateProduct,deleteProduct,addProductwithimage};
     export default controller;

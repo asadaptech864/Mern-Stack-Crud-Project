@@ -4,6 +4,7 @@ import UserController from '../Controllers/userConroller.mjs';
 import EmailController from '../Controllers/SendEmail.mjs';
 import VerificationEmailController from '../Controllers/emailverfication.mjs';
 import verifyoptController from '../Controllers/verifyopt.mjs';
+import { upload } from '../cloudinaryconfig.mjs';
 
 const router= express.Router();
 
@@ -14,6 +15,7 @@ router
 .get("/",controller.getAllProducts)
 .get("/product/:id",controller.getProduct)
 .post("/addproduct",controller.addProduct)
+.post("/addproductwithimage", upload.single('image'), controller.addProductwithimage)
 .put("/updateproduct/:id",controller.updateProduct)
 .delete("/deleteproduct/:id",controller.deleteProduct)
 // user routes
