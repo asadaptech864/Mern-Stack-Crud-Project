@@ -106,11 +106,10 @@ let getAllProducts=async(req,res)=>{
         let addProductwithimage=async(req,res)=>{
             try {
                 console.log(req.file.path);
-            let newProduct = new Product({
+                let newProduct = new Product({
                  name:req.body.name,
                  description:req.body.description,
                  price:req.body.price,
-              
                  imageUrl:req.file.path,
                  category:req.body.category,
                  inStock:req.body.inStock,

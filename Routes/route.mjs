@@ -20,4 +20,5 @@ router
 .delete("/deleteproduct/:id",controller.deleteProduct)
 // user routes
 .post("/addUser", UserController.addUser)
+.post("/userlogin", UserController.LoginUser)
 export default router; 
