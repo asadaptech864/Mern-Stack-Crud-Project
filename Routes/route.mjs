@@ -12,7 +12,7 @@ router
 .get("/verify-opt",verifyoptController. verifyOTP)
 .get("/Send-Email",EmailController.sendEmail)
 .get("/verificationEmail",VerificationEmailController.sendVerificationEmail)
-.get("/",controller.getAllProducts)
+.get("/",UserController.auth,controller.getAllProducts)
 .get("/product/:id",controller.getProduct)
 .post("/addproduct",controller.addProduct)
 .post("/addproductwithimage", upload.single('image'), controller.addProductwithimage)

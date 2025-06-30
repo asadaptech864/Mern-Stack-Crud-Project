@@ -1,5 +1,7 @@
 import Users from '../modals/userModal.mjs'
-import bcrypt from 'bcrypt'       
+import bcrypt from 'bcrypt' 
+import jwt from 'jsonwebtoken'  
+
 // Add a new Sign Up
         let addUser=async(req,res)=>{
             try {
@@ -42,9 +44,12 @@ if (checkUser.length == 0) {
 } else {
     const match = bcrypt.compareSync(req.body.password, checkUser.password);
     if(match) {
+        const token = await jwt.sign({email: checkUser.email, _id: checkUser._id},process.env.JWT_SECRET,{ expiresIn: '12h'})
+        res.cookie("token",token, { maxAge: 43200, httpOnly: true})
         res.status(200).json({
             message:"User Login successfully",
             user:checkUser,
+            token:token,
         })
     } else {
         res.status(404).json({message:"Invalid Credentials"});
@@ -56,6 +61,23 @@ if (checkUser.length == 0) {
        res.status(500).json({message:"Internal server errror"});
     }
     }
+
+    // auth 
+
+    const auth = async (req, res, next)=>{
+        try {
+            const token = await req.cookies.token;
+            const decode = await jwt.verify(token, process.env.JWT_SECRET);
+            if (decode) {
+                next();
+            } else {
+                res.status(400).json({msg: "Invalid Token"})
+            }
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({message:"Internal server errror"});
+        }
+    }
   
-    const UserController = {addUser, LoginUser};
+    const UserController = {addUser, LoginUser, auth};
     export default UserController;
